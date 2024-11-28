@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import Search from './components/Search';
+import Old from './components/Weather';
 
 function App() {
   return (
     <div className="App">
       <h1>Aplikacja pogodowa</h1>
-      <Search />
+      <Old />
     </div>
   );
 }

@@ -5,11 +5,9 @@ const Search = () => {
     const [city, setCity] = useState("");
     const [weather, setWeather] = useState(null);
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
 
     const fetchWeather = async () => {
         try {
-            setLoading(true);
             setError(null);
             const response = await axios.get(
                 `https://wttr.in/${city}?format=j1`
@@ -18,8 +16,6 @@ const Search = () => {
         } catch (err) {
             setError("Nie znaleziono miasta. Spróbuj ponownie.");
             setWeather(null);
-        } finally {
-            setLoading(false);
         }
     };
 
