@@ -1,29 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-typedef struct{
-        char nazwa[101];
-        char pochodzenie[101];
-        char tworcy[101];
-        int zagrozenie;
-        int rokOdkrycia;
-        char status[101];
-    } Artefakt;
-
-Artefakt baza[50];
-int liczbaArtefaktow = 0;
-
-/*
-dodajArtefakt();
-wyswietlArtefakty();
-wyszukajArtefakt();
-sortujArtefakty();
-modyfikujArtefakt();
-usunArtefakt();
-zapiszDoPliku();
-odczytajZPliku();
-*/
+#include "artefakty.h"
 
 void menu(){
     printf("1. Dodaj artefakt\n");
@@ -38,18 +16,28 @@ void menu(){
     printf("Wybierz opcje: ");
 }
 
-int main(){
-    int wybor;
+int main() {
+    
+    int wybor = -1;
+    Node* lista = NULL;
 
     while(wybor != 0){
         menu();
-        scanf("%d", &wybor);
+        
+        if (scanf("%d", &wybor) != 1) {
+            while(getchar() != '\n');
+            printf("Wpisz liczbe!\n");
+            continue;
+        }
+        
+        while(getchar() != '\n');
+
         switch(wybor){
             case 1:
-                //dodajArtefakt();
+                lista = dodajArtefakt(lista);
                 break;
             case 2:
-                //wyswietlArtefakty();
+                wyswietlArtefakty(lista);
                 break;
             case 3:
                 //wyszukajArtefakt();
