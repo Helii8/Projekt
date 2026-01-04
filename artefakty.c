@@ -16,22 +16,44 @@ Node* dodajArtefakt(Node *head){
     printf("Podaj tworcow: ");
     fgets(nowy->dane.tworcy, 101,stdin);
 
-    printf("Podaj poziom zagrozenia: ");
-    scanf("%d", &nowy->dane.zagrozenie);
-    while(getchar() != '\n');
+    int wyborZagrozenia = -1;
+    while(wyborZagrozenia < 0 || wyborZagrozenia > 10){
+        printf("Podaj poziom zagrozenia 0-10: ");
+        if(scanf("%d", &wyborZagrozenia) != 1){
+            while(getchar() != '\n');
+            printf("Wpisz liczbe.\n");
+            wyborZagrozenia = -1;
+            continue;
+        }
+
+        if(wyborZagrozenia < 0 || wyborZagrozenia > 10){
+            printf("Wybierz liczbe 0-10.\n");
+        }
+    }
+    nowy->dane.zagrozenie = wyborZagrozenia;
 
     printf("Podaj rok odkrycia: ");
     scanf("%d", &nowy->dane.rokOdkrycia);
     while(getchar() != '\n');
 
-    printf("Podaj status: \n1. bezpieczny\n2. niestabilny\n3. zakazany\nWybor: ");
-    int s;
-    if(scanf("%d", &s) != 0){
+    int wyborStatusu = 0;
+    while(wyborStatusu < 1 || wyborStatusu > 5){
+        printf("Podaj status: \n1. bezpieczny\n2. niestabilny\n3. zakazany\n4. wymaga kwarantanny\n5. w trakcie badan\nWybor: ");
+        if(scanf("%d", &wyborStatusu) != 1){
+            while(getchar() != '\n');
+            printf("Wpisz liczbe.\n");
+            wyborStatusu = 0;
+            continue;
+        }
+
         while(getchar() != '\n');
-        
+
+        if(wyborStatusu < 1 || wyborStatusu > 5){
+            printf("Wybierz liczbe 1-5.\n");
+        }
     }
-    while(getchar() != '\n');
-    switch(s){
+    
+    switch(wyborStatusu){
         case 1:
             strcpy(nowy->dane.status, "bezpieczny\n");
             break;
@@ -41,8 +63,11 @@ Node* dodajArtefakt(Node *head){
         case 3:
             strcpy(nowy->dane.status, "zakazany\n");
             break;
-        default:
-            strcpy(nowy->dane.status, "nieznany\n");
+        case 4:
+            strcpy(nowy->dane.status, "wymaga kwarantanny\n");
+            break;
+        case 5:
+            strcpy(nowy->dane.status, "w trakcie badan\n");
             break;
     }
 
