@@ -7,8 +7,6 @@ Node* dodajArtefakt(Node *head){
         return head;
     }
 
-    while(getchar() != '\n');
-
     printf("Podaj nazwe artefaktu: ");
     fgets(nowy->dane.nazwa, 101,stdin);
 
@@ -25,6 +23,25 @@ Node* dodajArtefakt(Node *head){
     printf("Podaj rok odkrycia: ");
     scanf("%d", &nowy->dane.rokOdkrycia);
     while(getchar() != '\n');
+
+    printf("Podaj status: \n1. bezpieczny\n2. niestabilny\n3. zakazany\nWybor: ");
+    int s;
+    scanf("%d", &s);
+    while(getchar() != '\n');
+    switch(s){
+        case 1:
+            strcpy(nowy->dane.status, "bezpieczny\n");
+            break;
+        case 2:
+            strcpy(nowy->dane.status, "niestabilny\n");
+            break;
+        case 3:
+            strcpy(nowy->dane.status, "zakazany\n");
+            break;
+        default:
+            strcpy(nowy->dane.status, "nieznany\n");
+            break;
+    }
 
     nowy->nastepny = head;
     return nowy;
