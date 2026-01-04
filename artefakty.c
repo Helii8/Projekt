@@ -26,7 +26,10 @@ Node* dodajArtefakt(Node *head){
 
     printf("Podaj status: \n1. bezpieczny\n2. niestabilny\n3. zakazany\nWybor: ");
     int s;
-    scanf("%d", &s);
+    if(scanf("%d", &s) != 0){
+        while(getchar() != '\n');
+        
+    }
     while(getchar() != '\n');
     switch(s){
         case 1:
@@ -64,10 +67,28 @@ void wyswietlArtefakty(Node *head){
         aktualny = aktualny->nastepny;
     }
 }
+
+void zapiszDoPliku(Node *head, const char *nazwaPliku){
+    FILE *plik= fopen(nazwaPliku, "w");
+    if(!plik){
+        fprintf(stderr, "Blad otwarcia pliku do zapisu.\n");
+    }
+    Node* aktualny = head;
+    while(aktualny != NULL){
+        fprintf(plik, "%s", aktualny->dane.nazwa);
+        fprintf(plik, "%s", aktualny->dane.pochodzenie);
+        fprintf(plik, "%s", aktualny->dane.tworcy);
+        fprintf(plik, "%d\n", aktualny->dane.zagrozenie);
+        fprintf(plik, "%d\n", aktualny->dane.rokOdkrycia);
+        fprintf(plik, "%s", aktualny->dane.status);
+        aktualny = aktualny->nastepny;
+    }
+    fclose(plik);
+}
+
 /*
 wyszukajArtefakt();
 sortujArtefakty();
 modyfikujArtefakt();
 usunArtefakt();
-zapiszDoPliku();
 odczytajZPliku();*/

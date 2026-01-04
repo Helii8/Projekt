@@ -52,14 +52,14 @@ int main() {
                 //usunArtefakt();
                 break;
             case 7:
-                //zapiszDoPliku();
+                zapiszDoPliku(lista, "baza.txt");
                 break;
             case 8:
                 //odczytajZPliku();
                 break;
             case 0:
                 printf("Zamykanie programu...\n");
-                //zapiszDoPliku();
+                zapiszDoPliku(lista, "baza.txt");
                 break;
             default:
                 printf("Niepoprawna opcja.\n");
