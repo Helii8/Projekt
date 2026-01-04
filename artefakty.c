@@ -111,9 +111,41 @@ void zapiszDoPliku(Node *head, const char *nazwaPliku){
     fclose(plik);
 }
 
+Node *odczytajZPliku(Node *head, const char *nazwaPliku){
+    FILE *plik = fopen(nazwaPliku, "r");
+    if(!plik){
+        fprintf(stderr, "Blad otwarcia pliku do odczytu.\n");
+        return head;
+    }
+
+    char bufor[256];
+
+    while(1){
+        if(fgets(bufor, sizeof(bufor), plik) == NULL) break;
+        Node* nowy = (Node*)malloc(sizeof(Node));
+        if(nowy == NULL){
+            printf("Blad alokacji pamieci!\n");
+            break;
+        }
+        strcpy(nowy->dane.nazwa, bufor);
+        fgets(nowy->dane.pochodzenie, 101, plik);
+        fgets(nowy->dane.tworcy, 101, plik);
+        fgets(bufor, sizeof(bufor), plik);
+        nowy->dane.zagrozenie = atoi(bufor);
+        fgets(bufor, sizeof(bufor), plik);
+        nowy->dane.rokOdkrycia = atoi(bufor);
+        fgets(nowy->dane.status, 101, plik);
+        nowy->nastepny = head;
+        head = nowy;
+    }
+
+    fclose(plik);
+    return head;
+}
+
 /*
 wyszukajArtefakt();
 sortujArtefakty();
 modyfikujArtefakt();
 usunArtefakt();
-odczytajZPliku();*/
+*/
