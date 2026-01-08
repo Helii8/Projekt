@@ -16,12 +16,16 @@ void menu(){
     printf("Wybierz opcje: ");
 }
 
-int main() {
-    
+int main(int argc, char *argv[]) {
+    if ( argc < 2 ) { 
+        fprintf(stderr, "Nie podano nazwy pliku!");
+        return 1;
+    }
+
     int wybor = -1;
     Node* lista = NULL;
 
-    lista = odczytajZPliku(lista, "baza.txt");
+    lista = odczytajZPliku(lista, argv[1]);
 
     while(wybor != 0){
         menu();
@@ -54,14 +58,14 @@ int main() {
                 //usunArtefakt();
                 break;
             case 7:
-                zapiszDoPliku(lista, "baza.txt");
+                zapiszDoPliku(lista, argv[1]);
                 break;
             case 8:
-                lista = odczytajZPliku(lista, "baza.txt");
+                lista = odczytajZPliku(lista, argv[1]);
                 break;
             case 0:
                 printf("Zamykanie programu...\n");
-                zapiszDoPliku(lista, "baza.txt");
+                zapiszDoPliku(lista, argv[1]);
                 break;
             default:
                 printf("Niepoprawna opcja.\n");
