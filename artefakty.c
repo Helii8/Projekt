@@ -131,7 +131,7 @@ Node *odczytajZPliku(Node *head, const char *nazwaPliku){
         fgets(nowy->dane.pochodzenie, 101, plik);
         fgets(nowy->dane.tworcy, 101, plik);
         fgets(bufor, sizeof(bufor), plik);
-        nowy->dane.zagrozenie = atoi(bufor);
+        nowy->dane.zagrozenie = atoi(bufor); //zamiana asci na int
         fgets(bufor, sizeof(bufor), plik);
         nowy->dane.rokOdkrycia = atoi(bufor);
         fgets(nowy->dane.status, 101, plik);
@@ -143,9 +143,32 @@ Node *odczytajZPliku(Node *head, const char *nazwaPliku){
     return head;
 }
 
+Node* usunArtefakt(Node *head, const char *nazwa){
+    if(head == NULL){
+        printf("Lista jest pusta. Nie mozna usunac artefaktu.\n");
+        return head;
+    }
+    Node* aktualny = head;
+    Node* poprzedni = NULL;
+    while(aktualny != NULL){
+        if(strcmp(aktualny->dane.nazwa, nazwa) == 0){
+            if(aktualny->dane.zagrozenie >= 8){
+                printf("Nie mozna usunac. Zbyt niebezpieczny artefakt.\n");
+                return head;
+            }
+            poprzedni->nastepny = aktualny->nastepny; // pomijamy usuniety
+            free(aktualny);
+            printf("Artefakt usuniety.\n");
+            return head;
+        }
+        poprzedni = aktualny;
+        aktualny = aktualny->nastepny;
+    }
+    return head;
+}
+
 /*
 wyszukajArtefakt();
 sortujArtefakty();
 modyfikujArtefakt();
-usunArtefakt();
 */

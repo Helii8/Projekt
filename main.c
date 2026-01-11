@@ -55,7 +55,10 @@ int main(int argc, char *argv[]) {
                 //modyfikujArtefakt();
                 break;
             case 6:
-                //usunArtefakt();
+                printf("Podaj nazwe artefaktu do usuniecia: ");
+                char nazwa[101];
+                fgets(nazwa, 101, stdin);
+                lista = usunArtefakt(lista, nazwa);
                 break;
             case 7:
                 zapiszDoPliku(lista, argv[1]);
