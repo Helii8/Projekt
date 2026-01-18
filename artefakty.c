@@ -167,8 +167,50 @@ Node* usunArtefakt(Node *head, const char *nazwa){
     return head;
 }
 
+Node* modyfikujArtefakt(Node *head, const char *nazwa){
+    if(head == NULL){
+        printf("Lista jest pusta. Nie mozna usunac artefaktu.\n");
+        return head;
+    }
+    Node* aktualny = head;
+    int status = 0;
+    while(aktualny != NULL){
+        if(strcmp(aktualny->dane.nazwa, nazwa) == 0){
+            printf("Podaj nowy status artefaktu.\n");
+            scanf("%d", &status);
+            while(status < 1 && status > 5){
+                if(scanf("%d", &status) != 1){
+                    printf("Blad, podaj liczbe.\n");
+                    while(getchar() != '\n');
+                    status = 0;
+                }
+            }
+            while(getchar() != '\n');
+            if(status >= 1 && status <= 5){
+                switch(status) {
+                    case 1:
+                        strcpy(aktualny->dane.status, "bezpieczny\n");
+                        break;
+                    case 2:
+                        strcpy(aktualny->dane.status, "niestabilny\n");
+                        break;
+                    case 3:
+                        strcpy(aktualny->dane.status, "zakazany\n");
+                        break;
+                    case 4:
+                        strcpy(aktualny->dane.status, "wymaga kwarantanny\n");
+                        break;
+                }
+            }
+            printf("Artefakt zmodyfikowany.\n");
+            return head;
+        }
+        aktualny = aktualny->nastepny;
+    }
+    return head;
+}
+
 /*
 wyszukajArtefakt();
 sortujArtefakty();
-modyfikujArtefakt();
 */

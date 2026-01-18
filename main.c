@@ -52,7 +52,10 @@ int main(int argc, char *argv[]) {
                 //sortujArtefakty();
                 break;
             case 5:
-                //modyfikujArtefakt();
+                printf("Podaj nazwe artefaktu do modyfikacji: ");
+                char nazwa1[101];
+                fgets(nazwa1, 101, stdin);
+                modyfikujArtefakt(lista, nazwa1);
                 break;
             case 6:
                 printf("Podaj nazwe artefaktu do usuniecia: ");
