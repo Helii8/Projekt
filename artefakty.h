@@ -21,7 +21,7 @@ typedef struct Node {
 
 Node* dodajArtefakt(Node *head);
 void wyswietlArtefakty(Node *head);
-Node* wyszukajArtefakt(Node *head, const char *nazwa);
+Node* wyszukajArtefakt(Node *head, const char *nazwa, const int rok, int typSzukane);
 Node* sortujArtefakty(Node *head);
 Node* modyfikujArtefakt(Node *head, const char *nazwa);
 Node* usunArtefakt(Node *head, const char *nazwa);

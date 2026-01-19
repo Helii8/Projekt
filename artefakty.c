@@ -210,7 +210,48 @@ Node* modyfikujArtefakt(Node *head, const char *nazwa){
     return head;
 }
 
+Node* wyszukajArtefakt(Node *head, const char *nazwa, const int rok, int typSzukane){
+    if(head == NULL){
+        printf("Lista jest pusta. Nie mozna wyszukac artefaktu.\n");
+        return head;
+    }
+
+    Node* aktualny = head;
+    int znaleziono = 0;
+
+    while(aktualny != NULL){
+        int pasuje = 0;
+
+        if(typSzukane == 1){
+            if(strcmp(aktualny->dane.nazwa, nazwa) == 0){
+                pasuje = 1;
+            }
+        } else {
+            if(aktualny->dane.rokOdkrycia == rok){
+                pasuje = 1;
+            }
+        }
+        if(pasuje == 1){
+            printf("Nazwa: %s", aktualny->dane.nazwa);
+            printf("Pochodzenie: %s", aktualny->dane.pochodzenie);
+            printf("Tworcy: %s", aktualny->dane.tworcy);
+            printf("Zagrozenie: %d\n", aktualny->dane.zagrozenie);
+            printf("Rok odkrycia: %d\n", aktualny->dane.rokOdkrycia);
+            printf("Status: %s", aktualny->dane.status);
+            printf("-------------------------\n");
+            znaleziono = 1;
+        }
+
+        aktualny = aktualny->nastepny;
+    }
+
+    if(znaleziono == 0){
+        printf("Brak pasujacych artefaktow.\n");
+    }
+
+    return head;
+}
+
 /*
-wyszukajArtefakt();
 sortujArtefakty();
 */

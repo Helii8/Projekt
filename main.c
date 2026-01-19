@@ -45,9 +45,30 @@ int main(int argc, char *argv[]) {
             case 2:
                 wyswietlArtefakty(lista);
                 break;
-            case 3:
-                //wyszukajArtefakt();
+            case 3:{
+                int typSzukane = 0;
+                while(typSzukane == 0){
+                    printf("Wybierz do wyszukania: \n1. Nazwa\n2. Rok\n");
+                    scanf("%d", &typSzukane);
+                    while(getchar() != '\n');
+                    if(typSzukane == 1){
+                        printf("Podaj nazwe artefaktu do wyszukania: ");
+                        char nazwa[101];
+                        fgets(nazwa, 101, stdin);
+                        wyszukajArtefakt(lista, nazwa, 0, typSzukane);
+                    } else if(typSzukane == 2){
+                        printf("Podaj rok odkrycia artefaktu do wyszukania: ");
+                        int rok;
+                        scanf("%d", &rok);
+                        while(getchar() != '\n');
+                        wyszukajArtefakt(lista, "", rok, typSzukane);
+                    } else {
+                        printf("Wybierz od 1 do 2!\n");
+                        typSzukane = 0;
+                    }
+                }
                 break;
+            }
             case 4:
                 //sortujArtefakty();
                 break;
