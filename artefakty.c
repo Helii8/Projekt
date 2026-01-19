@@ -178,7 +178,7 @@ Node* modyfikujArtefakt(Node *head, const char *nazwa){
         if(strcmp(aktualny->dane.nazwa, nazwa) == 0){
             printf("Podaj nowy status artefaktu.\n");
             scanf("%d", &status);
-            while(status < 1 && status > 5){
+            while(status < 1 || status > 5){
                 if(scanf("%d", &status) != 1){
                     printf("Blad, podaj liczbe.\n");
                     while(getchar() != '\n');
