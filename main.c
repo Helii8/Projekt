@@ -69,9 +69,21 @@ int main(int argc, char *argv[]) {
                 }
                 break;
             }
-            case 4:
-                //sortujArtefakty();
+            case 4:{
+                int typSortowane = 0;
+                while(typSortowane == 0){
+                    printf("Wybierz do sortowania: \n1. Nazwa (a-z)\n2. Rok (rosnaco)\n");
+                    scanf("%d", &typSortowane);
+                    while(getchar() != '\n');
+                    if(typSortowane == 1 || typSortowane == 2){
+                        sortujArtefakty(lista, typSortowane);
+                    } else {
+                        printf("Wybierz od 1 do 2!\n");
+                        typSortowane = 0;
+                    }
+                }
                 break;
+            }
             case 5:
                 printf("Podaj nazwe artefaktu do modyfikacji: ");
                 char nazwa1[101];

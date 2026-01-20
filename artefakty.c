@@ -178,7 +178,7 @@ Node* modyfikujArtefakt(Node *head, const char *nazwa){
         if(strcmp(aktualny->dane.nazwa, nazwa) == 0){
             printf("Podaj nowy status artefaktu.\n");
             scanf("%d", &status);
-            while(status < 1 || status > 5){
+            while(status < 1 && status > 5){
                 if(scanf("%d", &status) != 1){
                     printf("Blad, podaj liczbe.\n");
                     while(getchar() != '\n');
@@ -252,6 +252,53 @@ Node* wyszukajArtefakt(Node *head, const char *nazwa, const int rok, int typSzuk
     return head;
 }
 
-/*
-sortujArtefakty();
-*/
+void sortujArtefakty(Node *head, int typSortowane){
+    if (head == NULL || head->nastepny == NULL) {
+        printf("Lista jest zbyt krotka.\n");
+        return;
+    }
+
+    int zamiana;
+    Node *aktualny;
+    Node *ostatni_posortowany = NULL; // wskaznik na ostatni posortowany element
+
+    do{
+        zamiana = 0;
+        aktualny = head;
+
+        while(aktualny->nastepny != ostatni_posortowany) {
+            if(typSortowane == 1){
+                if(strcmp(aktualny->dane.nazwa, aktualny->nastepny->dane.nazwa) > 0){//aktualny jest po nastepnym
+                
+                Artefakt temp = aktualny->dane;
+                
+                aktualny->dane = aktualny->nastepny->dane;
+                
+                aktualny->nastepny->dane = temp;
+
+                zamiana = 1;
+                }
+            } else {
+                if(aktualny->dane.rokOdkrycia > aktualny->nastepny->dane.rokOdkrycia){//aktualny jest po nastepnym
+                
+                Artefakt temp = aktualny->dane;
+                
+                aktualny->dane = aktualny->nastepny->dane;
+                
+                aktualny->nastepny->dane = temp;
+
+                zamiana = 1;
+                }
+            }
+            
+            aktualny = aktualny->nastepny;
+        }
+        
+        ostatni_posortowany = aktualny; // po kazdym przejsciu ostatni element jest juz na swoim miejscu
+        
+    }while(zamiana); // jak brak zmiany to 0
+
+    printf("Lista zostala posortowana.\n");
+    
+    wyswietlArtefakty(head);
+}
